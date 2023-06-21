@@ -39,16 +39,16 @@ def cw_describe_alarms():
             if len(response['MetricAlarms']) < 1:
                 return f'''                
                 ERROR: The {args.alarm_name} alarm does not have a record with status "{args.alarm_status}"
-                '''
+                ''', False
             elif alarm['StateValue'] != args.alarm_status:
                 return f'''
                 The {alarm['AlarmName']} alarm has no records with the state field on {args.alarm_status} status
-                '''
+                ''', False
             else:
                 return f'''
                 SUCCESS: The current state of the {alarm['AlarmName']} alarm is: {args.alarm_status}
                 State Reason: {alarm['StateReason']}
-                '''
+                ''', True
                 
     except botocore.exceptions.ClientError as error_found:
         if error_found.response['Error']['Code'] in exceptions:
