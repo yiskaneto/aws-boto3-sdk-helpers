@@ -46,7 +46,7 @@ def cw_describe_alarms():
                 print(f'ERROR: The {args.alarm_name} alarm does not have a record with status {args.alarm_status}')
                 return sys.exit(1)
             elif alarm['StateValue'] != args.alarm_status:
-                print(f"The {alarm['AlarmName']} alarm does not have any recent records in {args.alarm_status} state")
+                print(f"ERROR: The {alarm['AlarmName']} alarm does not have any recent records in {args.alarm_status} state")
                 return sys.exit(1)
             print(f'SUCCESS: The current state of the {alarm["AlarmName"]} alarm is: {args.alarm_status}\nState Reason: {alarm["StateReason"]}')
             return sys.exit(0)
