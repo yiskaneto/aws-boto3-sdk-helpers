@@ -61,4 +61,7 @@ def cw_describe_alarms():
         else:
             return f"Error occured : {error_found}"
 
-print(cw_describe_alarms())
+msg, status = cw_describe_alarms()
+
+print(msg)
+print(status)
