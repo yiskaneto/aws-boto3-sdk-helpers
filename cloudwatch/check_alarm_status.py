@@ -36,8 +36,9 @@ def cw_describe_alarms():
         )
         if response['MetricAlarms'][0]['StateValue'] != {args.alarm_status}:
             print(f'''
-            The the last status of the {response['MetricAlarms'][0]['AlarmName']} is not in {args.alarm_status} state
-                  ''')
+                  ['MetricAlarms'][0]['StateValue']
+                  The the last status of the {response['MetricAlarms'][0]['AlarmName']} is not in {args.alarm_status} state
+            ''')
 
     except botocore.exceptions.ClientError as error_found:
         if error_found.response['Error']['Code'] in exceptions:
