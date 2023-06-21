@@ -41,7 +41,7 @@ def cw_describe_alarms():
             if len(response['MetricAlarms']) < 1:
                 return f'ERROR: The {args.alarm_name} alarm does not have a record with status {args.alarm_status}', False
             elif alarm['StateValue'] != args.alarm_status:
-                return f'The records of the {alarm["AlarmName"]} alarm does not contain the state in {args.alarm_status} status', False
+                return f"The {alarm['AlarmName']} alarm does not have any recent records in {args.alarm_status} state", False
             else:
                 return f'SUCCESS: The current state of the {alarm["AlarmName"]} alarm is: {args.alarm_status}\nState Reason: {alarm["StateReason"]}', True
                 
