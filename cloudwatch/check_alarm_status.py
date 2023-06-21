@@ -34,7 +34,10 @@ def cw_describe_alarms():
             StateValue=f"{args.alarm_status}",
             MaxRecords=1,
         )
-        print(response['MetricAlarms'][0]['AlarmName']) ## A quick way to see the whole return object
+        if response['MetricAlarms'][0]['StateValue'] != 0:
+            print(f'''
+            The the last status of the {response['MetricAlarms'][0]['AlarmName']} is not in {args.alarm_status} state
+                  ''')
 
     except botocore.exceptions.ClientError as error_found:
         if error_found.response['Error']['Code'] in exceptions:
