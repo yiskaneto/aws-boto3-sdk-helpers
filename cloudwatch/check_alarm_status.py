@@ -1,6 +1,5 @@
 """
-describe_alarms.py returns an alarm with the values specified on the paramater of the describe_alarms function.
-
+check_alarm_status.py determines whether the passed alarm is in the expected state, which is passed to the --alarm_status flag.
 All options can be found at https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/cloudwatch/client/describe_alarms.html
 Be aware that not all options can be use at the same time
 """
@@ -17,6 +16,7 @@ def flag_init():
     """
     parser = argparse.ArgumentParser()
     parser.add_argument("--alarm_name", required=True, help="Name of the alarm")
+    parser.add_argument("--alarm-status", required=True, help="Alarm status")
     parser.add_argument("--aws_region", required=True, help="AWS region where to run the script")
     args = parser.parse_args()
     return args
@@ -31,7 +31,7 @@ def cw_describe_alarms():
         response = client.describe_alarms(
             AlarmNames=[f"{args.alarm_name}"],
             AlarmTypes=['MetricAlarm'],
-            StateValue='OK',
+            StateValue=f"{args.alarm_status}",
             MaxRecords=5,
         )
         print(response) ## A quick way to see the whole return object
