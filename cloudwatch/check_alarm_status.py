@@ -36,7 +36,7 @@ def cw_describe_alarms():
         )
         if len(response['MetricAlarms']) < 1:
             return f'''                
-            The {args.alarm_name} alarm does not have a record with status "{args.alarm_status}"
+            ERROR: The {args.alarm_name} alarm does not have a record with status "{args.alarm_status}"
             '''
         elif response['MetricAlarms'][0]['StateValue'] == args.alarm_status:
             return f'''
