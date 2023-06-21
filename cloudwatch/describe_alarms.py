@@ -1,37 +1,47 @@
+"""
+All options can be found at https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/cloudwatch/client/describe_alarms.html
+
+Be aware that not all options can be use at the same time
+"""
+
 import boto3, botocore
 import argparse
 
-parser = argparse.ArgumentParser()
-parser.add_argument("--alarm_name", help="Name of the alarm")
-parser.add_argument("--aws_region", help="aws region where to look for the bucket")
-args = parser.parse_args()
 
 exceptions = ["InvalidNextToken"]
 
-try:
-    client = boto3.client('cloudwatch', region_name=args.aws_region)
-    response = client.describe_alarms(
-        AlarmNames=[
-            'string',
-        ],
-        AlarmNamePrefix='string',
-        AlarmTypes=[
-            'CompositeAlarm'|'MetricAlarm',
-        ],
-        ChildrenOfAlarmName='string',
-        ParentsOfAlarmName='string',
-        StateValue='OK'|'ALARM'|'INSUFFICIENT_DATA',
-        ActionPrefix='string',
-        MaxRecords=123,
-        NextToken='string'
-    )
-    # print(f"LocationConstraint: {response['LocationConstraint']}")
+def flag_init():
+    """
+    Init flags required by the module
+    """
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--alarm_name", help="Name of the alarm")
+    parser.add_argument("--aws_region", help="AWS region where to run the script")
+    args = parser.parse_args()
+    return args
 
-except botocore.exceptions.Clienterror_foundor as error_found:
-    if error_found.response['error_foundor']['Code'] in exceptions:
-        print(f"error_foundor Code: {format(error_found.response['error_foundor']['Code'])}")
-        print(f"Message: {format(error_found.response['error_foundor']['Message'])}")
-        print(f"Request ID: {format(error_found.response['ResponseMetadata']['RequestId'])}")
-        print(f"Http code: {format(error_found.response['ResponseMetadata']['HTTPStatusCode'])}")   
-    else:
-        print(f"error_foundor occured : {error_found}")
+def cw_describe_alarms():
+    """
+    cw_describe_alarms describes the passed alarm
+    """
+    args = flag_init()
+    client = boto3.client('cloudwatch',region_name=args.aws_region)
+    try:
+        response = client.describe_alarms(
+            AlarmNames=[f"{args.alarm_name}"],
+            AlarmTypes=['MetricAlarm'],
+            StateValue='OK'|'ALARM'|'INSUFFICIENT_DATA',
+            MaxRecords=5,
+        )
+        print(response) ## A quick way to see the whole return object
+
+    except botocore.exceptions.ClientError as error_found:
+        if error_found.response['Error']['Code'] in exceptions:
+            print(f"Error Code: {format(error_found.response['Error']['Code'])}")
+            print(f"Message: {format(error_found.response['Error']['Message'])}")
+            print(f"Request ID: {format(error_found.response['ResponseMetadata']['RequestId'])}")
+            print(f"Http code: {format(error_found.response['ResponseMetadata']['HTTPStatusCode'])}")   
+        else:
+            print(f"Error occured : {error_found}")
+
+cw_describe_alarms()
