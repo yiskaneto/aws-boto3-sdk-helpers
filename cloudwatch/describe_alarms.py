@@ -30,7 +30,7 @@ def cw_describe_alarms():
         response = client.describe_alarms(
             AlarmNames=[f"{args.alarm_name}"],
             AlarmTypes=['MetricAlarm'],
-            StateValue='OKState',
+            StateValue='OK',
             MaxRecords=5,
         )
         print(response) ## A quick way to see the whole return object
