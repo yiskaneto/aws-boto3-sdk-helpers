@@ -34,7 +34,7 @@ def cw_describe_alarms():
             StateValue=f"{args.alarm_status}",
             MaxRecords=1,
         )
-        if response['MetricAlarms'][0]['StateValue'] != {args.alarm_status}:
+        if response['MetricAlarms'][0]['StateValue'] == {args.alarm_status}:
             return f'''                
             The status of the {response['MetricAlarms'][0]['AlarmName']} is not in {args.alarm_status} state
             Current state: {response['MetricAlarms'][0]['StateValue']}
