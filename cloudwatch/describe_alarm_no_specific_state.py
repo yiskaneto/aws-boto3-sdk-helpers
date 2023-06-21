@@ -49,11 +49,13 @@ def cw_describe_alarms():
             '''
     except botocore.exceptions.ClientError as error_found:
         if error_found.response['Error']['Code'] in exceptions:
-            print(f"Error Code: {format(error_found.response['Error']['Code'])}")
-            print(f"Message: {format(error_found.response['Error']['Message'])}")
-            print(f"Request ID: {format(error_found.response['ResponseMetadata']['RequestId'])}")
-            print(f"Http code: {format(error_found.response['ResponseMetadata']['HTTPStatusCode'])}")   
+            return f'''
+            Error Code: {format(error_found.response['Error']['Code'])}
+            Message: {format(error_found.response['Error']['Message'])}
+            Request ID: {format(error_found.response['ResponseMetadata']['RequestId'])}
+            Http code: {format(error_found.response['ResponseMetadata']['HTTPStatusCode'])}
+            '''  
         else:
-            print(f"Error occured : {error_found}")
+            return f"Error occured : {error_found}"
 
 print(cw_describe_alarms())
