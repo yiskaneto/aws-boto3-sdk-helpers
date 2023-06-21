@@ -32,7 +32,7 @@ def cw_describe_alarms():
             AlarmNames=[f"{args.alarm_name}"],
             AlarmTypes=['MetricAlarm'],
             StateValue=f"{args.alarm_status}",
-            MaxRecords=255,
+            MaxRecords=1,
         )
         if len(response['MetricAlarms']) < 1:
             return f'''                
