@@ -34,14 +34,18 @@ def cw_describe_alarms():
             MaxRecords=50,
         )
         print(response['MetricAlarms'])
-        if len(response['MetricAlarms']) < 1:
-            return f'''                
-            ERROR: The {args.alarm_name} alarm does not have a record with status "{args.alarm_status}"
-            '''
-        elif response['MetricAlarms'][0]['StateValue'] == args.alarm_status:
-            return f'''
-            SUCCESS: The current state of the {response['MetricAlarms'][0]['AlarmName']} alarm is: {args.alarm_status}
-            State Reason: {response['MetricAlarms'][0]['StateReason']}
+
+        for alarm in response['MetricAlarms']:
+            if len(response['MetricAlarms']) < 1:
+                return f'''                
+                ERROR: The {args.alarm_name} alarm does not have a record with status "{args.alarm_status}"
+                '''
+            elif alarm['StateValue'] == args.alarm_status:
+                return f'''
+                SUCCESS: The current state of the {response['MetricAlarms'][0]['AlarmName']} alarm is: {args.alarm_status}
+                State Reason: {response['MetricAlarms'][0]['StateReason']}
+            else:
+                return "to be found"
             '''
     except botocore.exceptions.ClientError as error_found:
         if error_found.response['Error']['Code'] in exceptions:
