@@ -16,7 +16,7 @@ def flag_init():
     """
     parser = argparse.ArgumentParser()
     parser.add_argument("--alarm_name", required=True, help="Name of the alarm")
-    parser.add_argument("--alarm-status", required=True, help="Alarm status")
+    parser.add_argument("--alarm_status", required=True, choices= ['OK','ALARM','INSUFFICIENT_DATA'], help="Alarm status")
     parser.add_argument("--aws_region", required=True, help="AWS region where to run the script")
     args = parser.parse_args()
     return args
@@ -45,8 +45,7 @@ def cw_describe_alarms():
                 return f'ERROR: The {args.alarm_name} alarm does not have a record with status {args.alarm_status}', False
             elif alarm['StateValue'] != args.alarm_status:
                 return f"The {alarm['AlarmName']} alarm does not have any recent records in {args.alarm_status} state", False
-            else:
-                return f'SUCCESS: The current state of the {alarm["AlarmName"]} alarm is: {args.alarm_status}\nState Reason: {alarm["StateReason"]}', True
+            return f'SUCCESS: The current state of the {alarm["AlarmName"]} alarm is: {args.alarm_status}\nState Reason: {alarm["StateReason"]}', True
                 
     except botocore.exceptions.ClientError as error_found:
         if error_found.response['Error']['Code'] in exceptions:
@@ -56,9 +55,7 @@ def cw_describe_alarms():
             Request ID: {format(error_found.response['ResponseMetadata']['RequestId'])}
             Http code: {format(error_found.response['ResponseMetadata']['HTTPStatusCode'])}
             '''  
-        else:
-            return f"Error occured : {error_found}"
+        return f"Error occured : {error_found}"
 
-msg, status = cw_describe_alarms()
-
-print(f"{msg}\n{status}")
+if __name__ == "__main__":
+    print(cw_describe_alarms())
