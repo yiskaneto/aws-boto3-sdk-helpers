@@ -30,11 +30,11 @@ def cw_describe_alarms():
     try:
         response = client.describe_alarms(
             AlarmNames=[f"{args.alarm_name}"],
-            AlarmTypes=['MetricAlarm']['AlarmName'],
+            AlarmTypes=['MetricAlarm'],
             StateValue=f"{args.alarm_status}",
             MaxRecords=5,
         )
-        print(response['MetricAlarms']) ## A quick way to see the whole return object
+        print(response['MetricAlarms']['AlarmName']) ## A quick way to see the whole return object
 
     except botocore.exceptions.ClientError as error_found:
         if error_found.response['Error']['Code'] in exceptions:
