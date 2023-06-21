@@ -39,7 +39,9 @@ def cw_describe_alarms():
             The status of the {response['MetricAlarms'][0]['AlarmName']} is not in {args.alarm_status} state
             Current state: {response['MetricAlarms'][0]['StateValue']}
             '''
-        return "SUCCESS"
+        return f'''
+        SUCCESS: The current state of the {response['MetricAlarms'][0]['AlarmName']} alarm is: {args.alarm_status}
+        '''
 
     except botocore.exceptions.ClientError as error_found:
         if error_found.response['Error']['Code'] in exceptions:
