@@ -4,9 +4,10 @@ All options can be found at https://boto3.amazonaws.com/v1/documentation/api/lat
 Be aware that not all options can be use at the same time
 """
 
-import boto3, botocore
+import sys
 import argparse
-
+import boto3
+import botocore
 
 exceptions = ["InvalidNextToken"]
 
@@ -42,19 +43,22 @@ def cw_describe_alarms():
 
         for alarm in response['MetricAlarms']:
             if len(response['MetricAlarms']) < 1:
-                return f'ERROR: The {args.alarm_name} alarm does not have a record with status {args.alarm_status}', False
+                print(f'ERROR: The {args.alarm_name} alarm does not have a record with status {args.alarm_status}')
+                return sys.exit(1)
             elif alarm['StateValue'] != args.alarm_status:
-                return f"The {alarm['AlarmName']} alarm does not have any recent records in {args.alarm_status} state", False
-            return f'SUCCESS: The current state of the {alarm["AlarmName"]} alarm is: {args.alarm_status}\nState Reason: {alarm["StateReason"]}', True
+                print(f"The {alarm['AlarmName']} alarm does not have any recent records in {args.alarm_status} state")
+                return sys.exit(1)
+            print(f'SUCCESS: The current state of the {alarm["AlarmName"]} alarm is: {args.alarm_status}\nState Reason: {alarm["StateReason"]}')
+            return sys.exit(0)
                 
     except botocore.exceptions.ClientError as error_found:
         if error_found.response['Error']['Code'] in exceptions:
-            return f'''
+            print(f'''
             Error Code: {format(error_found.response['Error']['Code'])}
             Message: {format(error_found.response['Error']['Message'])}
             Request ID: {format(error_found.response['ResponseMetadata']['RequestId'])}
             Http code: {format(error_found.response['ResponseMetadata']['HTTPStatusCode'])}
-            '''  
+            ''')
         return f"Error occured : {error_found}"
 
 
