@@ -63,5 +63,4 @@ def cw_describe_alarms():
 
 msg, status = cw_describe_alarms()
 
-print(msg)
-print(status)
+print(msg, status)
