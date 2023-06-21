@@ -15,8 +15,8 @@ def flag_init():
     Init flags required by the module
     """
     parser = argparse.ArgumentParser()
-    parser.add_argument("--alarm_name", help="Name of the alarm")
-    parser.add_argument("--aws_region", help="AWS region where to run the script")
+    parser.add_argument("--alarm_name", required=True, help="Name of the alarm")
+    parser.add_argument("--aws_region", required=True, help="AWS region where to run the script")
     args = parser.parse_args()
     return args
 
