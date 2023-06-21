@@ -58,4 +58,4 @@ def cw_describe_alarms():
 
 msg, status = cw_describe_alarms()
 
-print(msg, status)
+print(msg, "\n", status)
