@@ -50,4 +50,4 @@ def cw_describe_alarms():
         else:
             print(f"Error occured : {error_found}")
 
-cw_describe_alarms()
+print(cw_describe_alarms())
