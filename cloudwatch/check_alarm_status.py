@@ -34,8 +34,8 @@ def cw_describe_alarms():
             StateValue=f"{args.alarm_status}",
             MaxRecords=50,
         )
-        print(len(response))
-        print(response)
+        print(len(response['MetricAlarms']))
+        print(response['MetricAlarms'])
         for metric in response['MetricAlarms']:
             print(metric['StateValue'])
         if len(response['MetricAlarms']) < 1:
