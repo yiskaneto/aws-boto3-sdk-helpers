@@ -25,7 +25,10 @@ def cw_describe_alarms():
     """
     cw_describe_alarms describes the passed alarm.
 
-    It returns a message and a bool, the message is to report what has happened and the bool is to let the function caller decide what to do next depending on the bool value. 
+    It returns a message and a bool, the message is to report what has happened and the bool is to let the function caller decide what to do next depending on the bool value.
+
+    usage example:
+    python check_alarm_status.py --aws_region <region> --alarm_name <alarm> --alarm-status OK|ALARM|INSUFFICIENT_DATA 
     """
     args = flag_init()
     client = boto3.client('cloudwatch',region_name=args.aws_region)
