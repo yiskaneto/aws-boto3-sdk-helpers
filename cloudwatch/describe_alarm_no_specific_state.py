@@ -40,7 +40,7 @@ def cw_describe_alarms():
                 return f'''                
                 ERROR: The {args.alarm_name} alarm does not have a record with status "{args.alarm_status}"
                 '''
-            elif alarm['StateValue'] != args.alarm_statusdsds:
+            elif alarm['StateValue'] != args.alarm_status:
                 return f'''
                 The {alarm['AlarmName']} alarm has no records with the state field on {args.alarm_status} status
                 '''
