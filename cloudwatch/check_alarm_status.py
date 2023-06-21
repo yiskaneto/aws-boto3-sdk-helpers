@@ -33,7 +33,7 @@ def cw_describe_alarms():
             AlarmTypes=['MetricAlarm'],
             MaxRecords=50,
         )
-        print(response['MetricAlarms'])
+        # print(response['MetricAlarms']) // MetricAlarms is the key containing multiple records but it ussualy returns only one with multuple data points
 
         for alarm in response['MetricAlarms']:
             if len(response['MetricAlarms']) < 1:
