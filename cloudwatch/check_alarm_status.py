@@ -34,7 +34,7 @@ def cw_describe_alarms():
             StateValue=f"{args.alarm_status}",
             MaxRecords=1,
         )
-        if response['MetricAlarms'][0]['StateValue'] != 0:
+        if response['MetricAlarms'][0]['StateValue'] != {args.alarm_status}:
             print(f'''
             The the last status of the {response['MetricAlarms'][0]['AlarmName']} is not in {args.alarm_status} state
                   ''')
