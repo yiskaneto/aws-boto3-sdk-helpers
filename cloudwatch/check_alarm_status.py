@@ -57,5 +57,4 @@ def cw_describe_alarms():
             '''  
         return f"Error occured : {error_found}"
 
-if __name__ == "__main__":
-    print(cw_describe_alarms())
+
