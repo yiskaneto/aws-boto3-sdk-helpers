@@ -35,11 +35,11 @@ def cw_describe_alarms():
             MaxRecords=1,
         )
         if response['MetricAlarms'][0]['StateValue'] != {args.alarm_status}:
-            print(f'''
-                  
-                  The status of the {response['MetricAlarms'][0]['AlarmName']} is not in {args.alarm_status} state
-                  Current state: {response['MetricAlarms'][0]['StateValue']}
-            ''')
+            return f'''                
+            The status of the {response['MetricAlarms'][0]['AlarmName']} is not in {args.alarm_status} state
+            Current state: {response['MetricAlarms'][0]['StateValue']}
+            '''
+        return "SUCCESS"
 
     except botocore.exceptions.ClientError as error_found:
         if error_found.response['Error']['Code'] in exceptions:
