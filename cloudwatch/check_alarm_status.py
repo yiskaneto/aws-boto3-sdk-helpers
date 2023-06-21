@@ -32,8 +32,10 @@ def cw_describe_alarms():
             AlarmNames=[f"{args.alarm_name}"],
             AlarmTypes=['MetricAlarm'],
             StateValue=f"{args.alarm_status}",
-            MaxRecords=1,
+            MaxRecords=50,
         )
+        for metric in response['MetricAlarms']:
+            print(response['MetricAlarms'][0]['StateValue'])
         if len(response['MetricAlarms']) < 1:
             return f'''                
             ERROR: The {args.alarm_name} alarm does not have a record with status "{args.alarm_status}"
