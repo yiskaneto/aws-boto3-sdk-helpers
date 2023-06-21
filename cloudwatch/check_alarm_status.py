@@ -1,5 +1,5 @@
 """
-check_alarm_status.py determines whether the passed alarm is in the expected state, which is passed to the --alarm_status flag.
+check_alarm_status.py determines whether the passed alarm status if found in the provided alarm name.
 All options can be found at https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/cloudwatch/client/describe_alarms.html
 Be aware that not all options can be use at the same time
 """
