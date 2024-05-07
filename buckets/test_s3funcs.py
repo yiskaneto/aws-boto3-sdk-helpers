@@ -4,7 +4,6 @@ import boto3
 from moto import mock_s3
 from verification_modules.s3funcs import s3_ls
 
-
 @pytest.fixture
 def s3_boto():
     """Create an S3 boto3 client and return the client object"""
