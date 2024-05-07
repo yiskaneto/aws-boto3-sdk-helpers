@@ -27,7 +27,7 @@ def list_bucket_objects(args):
         s3 = boto3.client('s3', region_name=args.aws_region)
         response = s3.list_objects_v2(
                         Bucket=args.bucket,
-                        Prefix=args.prefix
+                        Prefix="" if not args.prefix else args.prefix
                     )
         # print(response) # get the full response
         for entry in response['Contents']:

@@ -4,6 +4,8 @@ import boto3, botocore
 sys.path.append( '../')
 from common.banners import cleanup_init_msg
 from list_bucket_functions import *
+from common.args import *
+
 
 # def a_bucket_function(bucket_name):
 #     """
@@ -16,7 +18,7 @@ from list_bucket_functions import *
 #     cleanup_success_banner(bucket_name, 0, total_time)
 #     return None
 
-# def list_bucket_objects():
+# def delete_bucket_objects():
 #     """
 #     Returns the provided bucket's objects.\n
 #     See more about this operation at:\n
