@@ -26,7 +26,7 @@ jobs:
           version_format: ${major}.${minor}.${patch}
 
     outputs:
-      version: ${{ steps.generate-version.outputs.version_tag }}
+      version_tag: ${{ steps.generate-version.outputs.version_tag }}
 
   release:
     if: github.event.pull_request.merged == true
