@@ -3,6 +3,7 @@ import boto3, botocore
 
 def get_bucket_region():
     """
+    Returns the provided bucket's aws region, which comes from the LocationConstraint response field.
     """
     parser = argparse.ArgumentParser()
     parser.add_argument("--bucket", required=True, help="Name of the bucket")
@@ -21,5 +22,8 @@ def get_bucket_region():
             print('Http code: {}'.format(err.response['ResponseMetadata']['HTTPStatusCode']))
         else:
             print("Error occured : ", err)
-            
-get_bucket_region()
+
+if __name__ == "__main__":
+    # This code will only be executed 
+    # if the script is run as the main program
+    get_bucket_region()
