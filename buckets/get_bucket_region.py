@@ -24,6 +24,4 @@ def get_bucket_region():
             print("Error occured : ", err)
 
 if __name__ == "__main__":
-    # This code will only be executed 
-    # if the script is run as the main program
     get_bucket_region()
