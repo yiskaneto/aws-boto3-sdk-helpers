@@ -1,13 +1,8 @@
-name: Build and Publish
+name: Create Release
 on:
   pull_request:
     branches: ["main"]
     types: ["opened", "synchronize", "edited", "closed"]
-
-env:
-  AWS_REGION: "us-east-1"
-  ECR_REPO: "yivolve/backend"
-  RESULT_ICON: ""
 
 permissions:
   contents: write
