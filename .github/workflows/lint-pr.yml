@@ -51,7 +51,6 @@ jobs:
             ```
 
           # Details:
-
           # ```
           # ${{ steps.lint_pr_title.outputs.error_message }}
           # ```
