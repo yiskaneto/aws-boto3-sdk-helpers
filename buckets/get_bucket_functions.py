@@ -1,16 +1,16 @@
-import argparse
-import boto3, botocore
+import sys
+import botocore
+sys.path.append( '../')
+from common.boto_client_declaration import s3_client
+from common.args import bucket_args_call
 
-def get_bucket_region():
+args, s3 = bucket_args_call, s3_client(bucket_args_call)
+
+def get_bucket_region(args):
     """
     Returns the provided bucket's aws region, which comes from the LocationConstraint response field.
     """
-    parser = argparse.ArgumentParser()
-    parser.add_argument("--bucket", required=True, help="Name of the bucket")
-    parser.add_argument("--aws_region", required=True, help="aws region where to look for the bucket")
-    args = parser.parse_args()
     try:
-        s3 = boto3.client('s3', region_name=args.aws_region)
         response = s3.get_bucket_location(Bucket = args.bucket)
         # print(response) # get the full response
         print(f"LocationConstraint: {response['LocationConstraint']}, see more about this operation at: https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketLocation.html")
@@ -24,4 +24,4 @@ def get_bucket_region():
             print("Error occured : ", err)
 
 if __name__ == "__main__":
-    get_bucket_region()
+    get_bucket_region(args)
