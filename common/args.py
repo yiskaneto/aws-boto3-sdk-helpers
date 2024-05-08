@@ -1,15 +1,24 @@
 import argparse
 
-def args_init():
+##########################################################################################################
+## Bucket
+def bucket_args():
     """
-    Initializes the arguments needed for the bucket operations.
+    Initializes the arguments needed to excecute operations on a given S3 bucket.
+
+    Example
+    -------
+    a_bucket_function(bucket_args())
     """
     parser = argparse.ArgumentParser()
     parser.add_argument("--bucket", required=True, help="Name of the bucket")
     parser.add_argument("--aws_region", required=True, help="aws region where to look for the bucket")
-    parser.add_argument("--prefix", required=False, help="Buckets Prefix")
+    parser.add_argument("--prefix", required=True, help="Buckets Prefix")
     args = parser.parse_args()
     return args
 
+bucket_args_call = bucket_args()
+##########################################################################################################
+
 if __name__ == "__main__":
-    print(args_init())
+    print(bucket_args())

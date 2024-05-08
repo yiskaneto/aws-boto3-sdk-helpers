@@ -11,7 +11,7 @@ def list_bucket_objects(args):
 
     Example
     -----------
-    list_bucket_objects(args_init())
+    list_bucket_objects(bucket_args())
 
     Parameters
     ------------
@@ -20,9 +20,10 @@ def list_bucket_objects(args):
 
     Return
     -----------
-        bucket_key : string
-            The found object keys on the provided prefix
+        bucket_key : list of strings
+            A list of strings containing the bucket's key names
     """
+    object_keys = []
     try:
         s3 = boto3.client('s3', region_name=args.aws_region)
         response = s3.list_objects_v2(
@@ -30,8 +31,11 @@ def list_bucket_objects(args):
                         Prefix="" if not args.prefix else args.prefix
                     )
         # print(response) # get the full response
+        if 'Contents' not in response:
+            return []
         for entry in response['Contents']:
-            print(entry["Key"])
+            object_keys.append(entry["Key"])
+        return object_keys
 
     except botocore.exceptions.ClientError as err:
         if err.response['Error']['Code'] == 'NoSuchBucket':
@@ -42,4 +46,4 @@ def list_bucket_objects(args):
             print("Error occured : ", err)
 
 if __name__ == "__main__":
-    list_bucket_objects(args_init())
+    list_bucket_objects(bucket_args())

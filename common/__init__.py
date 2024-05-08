@@ -1,1 +1,1 @@
-__all__ = ['args','banners']
+__all__ = ['args', 'boto_client_declaration', 'banners']
