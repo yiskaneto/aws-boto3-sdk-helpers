@@ -1,5 +1,9 @@
 # AWS Boto3 SDK Helpers
 
+Contains helper functions for the AWS Python sdk (Boto3) package.
+
+## Manual use of boto3
+
 A few examples on how to use the AWS python SDK (Boto3)
 
 - [AWS Boto3 SDK Helpers](#aws-boto3-sdk-helpers)
@@ -20,5 +24,5 @@ python -m venv /opt/python_envs/boto3 && source /opt/python_envs/boto3/bin/activ
 [Install Boto 3 Official Docs](https://boto3.amazonaws.com/v1/documentation/api/latest/guide/quickstart.html#install-boto3)
 
 ```bash
-python -m pip install boto3
+python -m pip install boto3 botocore
 ```
