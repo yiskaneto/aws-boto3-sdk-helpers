@@ -1,13 +1,13 @@
-import sys, time
+import sys
 from datetime import datetime
 import botocore
 sys.path.append( '../')
-from common.args import bucket_args_call  ## This is the only variable we should be importing from the args module and pass it to the functions below
+from common.args import bucket_args  ## This is the only variable we should be importing from the args module and pass it to the functions below
 from common.boto_client_declaration import s3_client
 from common.banners import operation_start_msg, outcome_banner
 from list_bucket_functions import list_bucket_objects
 
-args, s3 = bucket_args_call, s3_client(bucket_args_call)
+args, s3 = bucket_args(), s3_client(bucket_args())
 
 def delete_bucket_objects(args):
     """
