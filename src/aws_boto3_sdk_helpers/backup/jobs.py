@@ -2,8 +2,6 @@ import boto3
 import botocore
 import argparse
 
-
-
 def check_backup_jobs():
     """
     Check backup jobs
@@ -21,7 +19,7 @@ def check_backup_jobs():
 
         else:
             print("\n\n\n\nlist_backup_jobs canot be pagginated, continuing...\n\n\n\n")
-            
+
     except botocore.exceptions.ClientError as err:
         if err.response['Error']['Code'] == 'AccessDeniedException':
             print('Request ID: {}'.format(err.response['ResponseMetadata']['RequestId']))
@@ -30,7 +28,7 @@ def check_backup_jobs():
         else:
             print("Error occured : ", err)
             raise err
-        
+
 def flag_init():
     """
     Init flags required by the module
