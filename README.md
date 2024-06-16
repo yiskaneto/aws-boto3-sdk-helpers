@@ -2,6 +2,16 @@
 
 Contains helper functions for the AWS Python sdk (Boto3) package.
 
+## Install
+
+`python -m pip install --upgrade aws-boto3-sdk-helpers`
+
+## Use
+
+```python
+
+```
+
 ## Manual use of boto3
 
 A few examples on how to use the AWS python SDK (Boto3)
