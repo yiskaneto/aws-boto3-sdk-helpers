@@ -1,6 +1,1 @@
-import sys
-sys.path.append( '../')
-import buckets
-import cloudwatch
-
-
+__init__ = ["buckets", "cloudwatch"]
