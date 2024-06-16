@@ -1,1 +1,1 @@
-__init__ = ["buckets", "cloudwatch"]
+__all__ = ['buckets']
